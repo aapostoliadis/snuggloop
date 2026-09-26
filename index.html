@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snuggloop</title>
+<meta name="description" content="Snuggloop, one coral thread, knitted into a doll. Preorder the coral knitted doll and four pastel variants.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sage:#b5c9ae;
+  --sage-deep:#9db594;
+  --ivory:#f6f0e1;
+  --ivory-2:#efe7d3;
+  --ink:#16301f;
+  --ink-soft:#3b5443;
+  --red:#d8382c;
+  --line:rgba(22,48,31,.18);
+  --display:"Cabinet Grotesk","Helvetica Neue",Arial,sans-serif;
+  --text:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(16px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ivory);color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.55;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.02}
+.eyebrow{font:600 12px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.wrap{padding-inline:var(--gutter);max-width:1320px;margin-inline:auto}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+
+/* header */
+header.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:14px var(--gutter);background:linear-gradient(var(--ivory),rgba(246,240,225,0));}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 20px/1 var(--display);letter-spacing:.16em}
+.brand svg{width:34px;height:34px}
+nav.chapters{display:none;gap:22px;font:500 14px var(--text)}
+nav.chapters a{text-decoration:none;color:var(--ink-soft)}
+nav.chapters a:hover{color:var(--ink)}
+@media(min-width:900px){nav.chapters{display:flex}}
+.btn{appearance:none;border:0;cursor:pointer;font:700 15px/1 var(--display);letter-spacing:.02em;padding:15px 24px;border-radius:999px;background:var(--red);color:#fff;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(216,56,44,.7)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink),0 10px 24px -12px rgba(22,48,31,.5)}
+.btn.small{padding:11px 18px;font-size:14px}
+
+/* hero */
+.hero{min-height:100svh;display:grid;align-items:center;padding:110px 0 60px;background:var(--sage);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;align-items:center;width:100%}
+.hero .wrap>*{min-width:0}
+@media(min-width:900px){.hero .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+.hero h1{font-size:clamp(46px,8.4vw,124px);letter-spacing:-.04em}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p.lede{max-width:34ch;margin:22px 0 30px;font-size:clamp(18px,2vw,22px);color:var(--ink)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero figure{position:relative;justify-self:center;width:min(100%,520px)}
+.hero figure img{width:100%;filter:drop-shadow(0 30px 30px rgba(22,48,31,.25));animation:float 7s ease-in-out infinite}
+.hero figure.herovid{aspect-ratio:3/4;border-radius:32px;overflow:hidden;background:#edd2bb;box-shadow:0 30px 60px -28px rgba(22,48,31,.55)}
+.hero figure.herovid video,.hero figure.herovid img.fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:none;filter:none}
+.hero figure.herovid img.fallback{object-fit:contain;padding:8%}
+.hero figure.herovid.playing img.fallback{display:none}
+.hero .wrap{position:relative;z-index:1}
+.hero .ring{pointer-events:none;position:absolute;inset:6% 4%;border-radius:50%;border:1.5px dashed rgba(22,48,31,.35);animation:spin 60s linear infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* marquee */
+.marquee{background:var(--ink);color:var(--ivory);overflow:hidden;border-block:1px solid var(--ink);padding:16px 0;user-select:none}
+.marquee .track{display:flex;width:max-content;animation:slide 48s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.marquee span{display:inline-flex;align-items:center;gap:22px;padding-right:22px;font:500 17px/1 var(--text);white-space:nowrap}
+.marquee span::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* chapter shell */
+.chapter{padding:clamp(80px,12vw,160px) 0;position:relative;overflow-x:clip}
+.chapter .num{font:800 clamp(80px,16vw,220px)/.8 var(--display);color:transparent;-webkit-text-stroke:1.5px var(--ink);opacity:.22;letter-spacing:-.04em}
+.chapter h2{font-size:clamp(38px,6vw,84px);margin:8px 0 20px}
+.chapter p{max-width:46ch;color:var(--ink-soft)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* chapter 1 thread to polo (scroll driven) */
+#c1{padding:0;background:var(--ivory)}
+.scrub{height:340vh;position:relative}
+.scrub .stick{position:sticky;top:0;height:100svh;display:grid;align-items:center;overflow:hidden}
+.scrub .grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:center;width:100%}
+.scrub .grid>*{min-width:0}
+@media(min-width:900px){.scrub .grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px}}
+.scrub .copy{position:relative}
+.scrub .num{font-size:clamp(56px,10vw,120px)}
+.scrub h2{font-size:clamp(34px,5vw,64px)}
+.scrub .stage-label{display:block;min-height:1.2em;margin-top:18px;font:700 14px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.scrub .meter{height:3px;background:var(--line);margin-top:24px;max-width:320px;border-radius:2px;overflow:hidden}
+.scrub .meter i{display:block;height:100%;width:0;background:var(--red)}
+.stage{position:relative;width:min(100%,560px);aspect-ratio:4/5;justify-self:center}
+.stage img,.stage svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.stage img{opacity:0;will-change:opacity}
+.stage svg path{fill:none;stroke:var(--red);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.stage .spool{fill:var(--red)}
+
+/* chapter 2 loops */
+#c2{background:var(--sage)}
+.loops{display:grid;gap:36px}
+@media(min-width:900px){.loops{grid-template-columns:1fr 1fr;align-items:end}}
+.stitch{aspect-ratio:1;border-radius:24px;background:var(--ivory);position:relative;overflow:hidden}
+.stitch svg{width:100%;height:100%}
+.stitch path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.stitch path.r{stroke:var(--red)}
+.stitch svg .row{animation:drift 6s ease-in-out infinite alternate}
+.stitch svg .row:nth-child(2n){animation-delay:-3s}
+@keyframes drift{to{transform:translateX(10px)}}
+
+/* chapter 3 cloth: facts */
+#c3{background:var(--ivory)}
+.facts{display:grid;gap:0;margin-top:40px;border-top:1.5px solid var(--ink)}
+.fact{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.fact b{font:800 clamp(30px,5vw,56px)/1 var(--display)}
+.fact span{color:var(--ink-soft);max-width:44ch}
+@media(min-width:900px){.fact{grid-template-columns:260px 1fr}}
+
+/* chapter 4 cut */
+#c4{background:var(--ink);color:var(--ivory)}
+#c4 .num{-webkit-text-stroke-color:var(--ivory)}
+#c4 p{color:rgba(246,240,225,.78)}
+.cut{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:center}
+.cut>*{min-width:0}
+@media(min-width:900px){.cut{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.cut figure{background:var(--sage);border-radius:28px;padding:28px;position:relative}
+.cut figure img{margin:auto;width:min(100%,460px)}
+.hotspot{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(216,56,44,.6);animation:pulse 2.4s infinite;border:0;cursor:pointer}
+@keyframes pulse{70%{box-shadow:0 0 0 14px rgba(216,56,44,0)}100%{box-shadow:0 0 0 0 rgba(216,56,44,0)}}
+.hotspot span{position:absolute;left:26px;max-width:40vw;top:-8px;background:var(--ivory);color:var(--ink);font:600 13px/1 var(--text);padding:8px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translateX(-4px);transition:.2s;pointer-events:none}
+.hotspot:hover span,.hotspot:focus-visible span{opacity:1;transform:none}
+.cutlist{list-style:none;display:grid;gap:18px;margin-top:28px}
+.cutlist li{padding-left:34px;position:relative;color:rgba(246,240,225,.86)}
+.cutlist li::before{content:"";position:absolute;left:0;top:.5em;width:20px;height:2px;background:var(--red)}
+
+/* chapter 5 colour */
+#c5{background:var(--sage)}
+.colour{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.colour{grid-template-columns:1fr 1fr}}
+.colour .view{position:relative;aspect-ratio:4/5;background:var(--ivory);border-radius:32px;overflow:hidden}
+.colour .view img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;opacity:0;transition:opacity .5s ease,transform .6s ease;transform:scale(.97)}
+.colour .view img.on{opacity:1;transform:none}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:26px}
+.sw{appearance:none;cursor:pointer;text-align:left;border:0;background:var(--ivory);border-radius:16px;padding:14px;font:600 15px var(--text);color:var(--ink);box-shadow:inset 0 0 0 1.5px transparent;transition:.2s}
+.sw i{display:block;width:100%;height:44px;border-radius:10px;margin-bottom:10px}
+.sw[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--ink)}
+.sw:hover{transform:translateY(-2px)}
+.sw small{display:block;font-weight:400;color:var(--ink-soft)}
+
+/* chapter 6 preorder */
+#c6{background:var(--ivory-2)}
+
+footer{background:var(--ink);color:var(--ivory);padding:48px 0}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+footer .brand svg{width:30px}
+footer small{opacity:.7}
+
+
+/* chapter 6 make yours */
+#c6{text-align:left}
+#c6 .wrap{display:block}
+#c6 h2{font-size:clamp(38px,6vw,84px);margin:8px 0 14px}
+#c6 p{margin:0;max-width:52ch}
+.make{display:grid!important;grid-template-columns:minmax(0,1fr);gap:36px}
+.make>*{min-width:0}
+@media(min-width:960px){.make{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}.make-view{position:sticky;top:96px}}
+.make-view{position:relative;aspect-ratio:4/5;background:var(--sage);border-radius:32px;overflow:hidden}
+.make-view img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;opacity:0;transition:opacity .5s ease}
+.make-view img.on{opacity:1}
+.stitchname{position:absolute;left:50%;top:63%;transform:translateX(-50%);font:800 clamp(14px,2.4vw,24px)/1 var(--display);letter-spacing:.14em;color:#16301f;opacity:.62;mix-blend-mode:multiply;pointer-events:none;white-space:nowrap;text-transform:uppercase}
+.customdot{position:absolute;left:16px;bottom:16px;display:none;align-items:center;gap:8px;background:var(--ivory);border-radius:999px;padding:8px 14px 8px 8px;font:600 13px var(--text)}
+.customdot i{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(22,48,31,.35)}
+.customdot.show{display:flex}
+.make-form{display:grid;gap:22px}
+.make-form fieldset{border:0;min-width:0}
+.make-form legend,.make-form .lab{font:700 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;display:block}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cards input,.chips2 input{position:absolute;opacity:0;pointer-events:none}
+.card{display:block;cursor:pointer;background:var(--ivory);border-radius:16px;padding:14px;box-shadow:inset 0 0 0 1.5px var(--line);transition:.2s}
+.card b{display:block;font:800 20px/1.1 var(--display)}
+.card span{display:block;font-size:14px;color:var(--ink-soft)}
+.card em{display:block;font:700 18px var(--display);font-style:normal;margin-top:8px}
+.cards input:checked+.card{box-shadow:inset 0 0 0 2px var(--ink);background:#fff8}
+.cards input:focus-visible+.card,.chips2 input:focus-visible+label{outline:3px solid var(--red);outline-offset:2px}
+.chips2{display:flex;flex-wrap:wrap;gap:8px}
+.chips2 label{cursor:pointer;font:600 14px var(--text);color:var(--ink);padding:10px 14px;border-radius:999px;background:var(--ivory);box-shadow:inset 0 0 0 1.5px var(--line);display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;margin:0}
+.chips2 label i{width:16px;height:16px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(22,48,31,.35)}
+.chips2 label small{color:var(--ink-soft);font-weight:500}
+.chips2 input:checked+label{box-shadow:inset 0 0 0 2px var(--ink);background:#fff8}
+.make-form input[type=text],.make-form textarea{width:100%;padding:13px 14px;font:500 16px var(--text);border:1.5px solid var(--line);border-radius:12px;background:#fff8;color:var(--ink)}
+.make-form input[type=text]:focus,.make-form textarea:focus{outline:none;border-color:var(--ink)}
+.customrow{display:none;align-items:center;gap:12px;margin-top:10px;font-size:14px;color:var(--ink-soft)}
+.customrow.show{display:flex}
+.customrow input[type=color]{width:44px;height:44px;border:0;padding:0;background:none;cursor:pointer;border-radius:10px}
+.pricebox{background:var(--ink);color:var(--ivory);border-radius:24px;padding:22px}
+.pricebox ul{list-style:none;display:grid;gap:8px;margin-bottom:14px}
+.pricebox li{display:flex;justify-content:space-between;gap:16px;font-size:15px;color:rgba(246,240,225,.86)}
+.pricebox .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(246,240,225,.25);padding-top:14px}
+.pricebox .tot b{font:800 clamp(34px,5vw,48px)/1 var(--display)}
+.pricebox .tot span{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.pricebox small{display:block;margin-top:12px;font-size:13px;color:rgba(246,240,225,.72)}
+.how{display:grid;gap:10px;font-size:14px;color:var(--ink-soft)}
+@media(min-width:700px){.how{grid-template-columns:repeat(3,1fr)}}
+.how div{border-top:1.5px solid var(--ink);padding-top:10px}
+.how b{display:block;font:800 16px var(--display);color:var(--ink)}
+.msum{background:var(--ivory-2);border-radius:16px;padding:14px 16px}
+.msum ul{list-style:none;display:grid;gap:4px;font-size:14px}
+.msum li{display:flex;justify-content:space-between;gap:12px}
+.msum .mt{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:8px;padding-top:8px;font:800 18px var(--display)}
+.modal textarea{width:100%;margin-top:6px;padding:12px 14px;font:500 15px var(--text);border:1.5px solid var(--line);border-radius:12px;background:#fff8;color:var(--ink);min-height:70px;resize:vertical}
+@media(max-width:520px){.cards{grid-template-columns:1fr}}
+
+/* modal */
+dialog{border:0;border-radius:28px;padding:0;background:var(--ivory);color:var(--ink);width:min(94vw,760px);max-height:92svh;overflow:auto;margin:auto}
+dialog::backdrop{background:rgba(22,48,31,.62);backdrop-filter:blur(4px)}
+.modal{display:grid}
+@media(min-width:700px){.modal{grid-template-columns:.85fr 1.15fr}}
+.modal .pic{display:none;background:var(--sage);place-items:center;padding:24px}
+@media(min-width:700px){.modal .pic{display:grid}}
+.modal .pic img{width:min(100%,260px)}
+.modal form{padding:28px;display:grid;gap:16px;position:relative}
+.modal h3{font-size:34px;padding-right:44px}
+.modal label,.modal legend{font:600 13px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.modal input[type=text],.modal input[type=email],.modal select{width:100%;margin-top:6px;padding:13px 14px;font:500 16px var(--text);border:1.5px solid var(--line);border-radius:12px;background:#fff8;color:var(--ink)}
+.modal input:focus,.modal select:focus{outline:none;border-color:var(--ink)}
+.modal fieldset{border:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{cursor:pointer;text-transform:none;letter-spacing:0;font:600 14px var(--text);color:var(--ink);padding:9px 14px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);display:flex;align-items:center;gap:8px}
+.chips label i{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(22,48,31,.35)}
+.chips input:checked+label{box-shadow:inset 0 0 0 2px var(--ink);background:var(--sage)}
+.chips input:focus-visible+label{outline:3px solid var(--red);outline-offset:2px}
+.close{position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;border:0;background:var(--ivory-2);cursor:pointer;font:700 18px var(--display);color:var(--ink)}
+.done{display:none;padding:48px 28px;text-align:center;grid-column:1/-1}
+.done svg{width:72px;margin:0 auto 12px}
+dialog.sent .modal{display:none}
+dialog.sent .done{display:block}
+.note{font-size:13px;color:var(--ink-soft)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .marquee .track,.hero figure img,.hero .ring,.hotspot,.stitch svg .row{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="knot" viewBox="0 0 48 48"></symbol>
+</svg>
+
+<header class="top">
+  <a class="brand" href="#top" aria-label="Snuggloop home">
+    <svg class="knot" viewBox="0 0 48 48" aria-hidden="true"></svg>
+    <span>SNUGGLOOP</span>
+  </a>
+  <nav class="chapters" aria-label="Chapters">
+    <a href="#c1">Thread</a><a href="#c2">Loop</a><a href="#c3">Cloth</a><a href="#c4">Shape</a><a href="#c5">Colour</a><a href="#c6">Make yours</a>
+  </nav>
+  <button class="btn small" data-open>Preorder</button>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="ring" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <h1>Made to<br>be <em>hugged.</em></h1>
+        <p class="lede">Snuggloop starts with a single coral thread and ends with a snuggly knitted doll that wants to be held. Preorders are open.</p>
+        <div class="cta">
+          <button class="btn" data-open>Preorder the coral doll</button>
+          <a class="btn ghost" href="#c1">Watch it come together</a>
+        </div>
+      </div>
+      <figure class="herovid">
+        <video id="heroVideo" autoplay muted loop playsinline preload="auto" width="720" height="960" aria-label="The Snuggloop coral knitted doll wiggling and tilting its head"></video>
+        <img data-img="doll" class="fallback" alt="" aria-hidden="true" width="520" height="650">
+      </figure>
+    </div>
+  </section>
+
+  <div class="marquee" role="marquee" aria-label="Fabric facts">
+    <div class="track" id="marquee"></div>
+  </div>
+
+  <!-- Chapter 1: thread becomes polo -->
+  <section class="chapter" id="c1" aria-label="Chapter 1, the thread">
+    <div class="scrub" id="scrub">
+      <div class="stick">
+        <div class="wrap grid">
+          <div class="copy">
+            <div class="num" aria-hidden="true">01</div>
+            <h2>The thread</h2>
+            <p>Scroll and watch a single coral thread loop, knot and knit itself into the doll. No cut panels at the start, only a long line finding its shape.</p>
+            <span class="stage-label" id="stageLabel" aria-live="polite">Thread</span>
+            <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+          </div>
+          <div class="stage" id="stage">
+            <svg viewBox="0 0 400 500" aria-hidden="true">
+              <circle class="spool" cx="70" cy="440" r="9"/>
+              <path id="threadPath" d="M70 440 C 40 395 95 372 112 405 C 126 436 62 452 92 414 C 112 388 100 350 118 322 C 90 290 96 200 150 165 C 130 150 118 118 132 100 C 146 82 168 92 170 112 C 176 100 180 92 200 90 C 214 70 230 70 226 90 C 222 105 206 108 200 92 C 222 96 226 100 232 112 C 232 92 254 82 268 100 C 282 118 270 150 250 165 C 304 200 310 290 282 322 C 330 360 320 440 250 445 C 200 452 150 452 118 435"/>
+            </svg>
+            <img data-img="thread" alt="A coral thread looped into the outline of a knitted doll" width="560" height="700">
+            <img data-img="half" alt="A knitted doll half formed from coral thread" width="560" height="700">
+            <img data-img="doll" alt="The finished coral knitted doll" width="560" height="700">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter 2 -->
+  <section class="chapter" id="c2" aria-label="Chapter 2, the loop">
+    <div class="wrap loops">
+      <div class="reveal">
+        <div class="num" aria-hidden="true">02</div>
+        <h2>The loop</h2>
+        <p>Every doll is thousands of small loops pulled through each other. We keep the loop tight and even, so the surface stays soft after a hundred cuddles and the ears hold their shape.</p>
+        <p style="margin-top:14px">A knot is the oldest promise in textiles. It holds because it is pulled, not because it is glued. That is the mark on our label.</p>
+      </div>
+      <div class="stitch reveal" aria-hidden="true"><svg viewBox="0 0 200 200" id="stitchSvg"></svg></div>
+    </div>
+  </section>
+
+  <!-- Chapter 3 -->
+  <section class="chapter" id="c3" aria-label="Chapter 3, the cloth">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="num" aria-hidden="true">03</div>
+        <h2>The cloth</h2>
+        <p>Soft on the first day, sturdier on the hundredth. These are the details we are working to, confirmed on each production run before anything ships.</p>
+      </div>
+      <div class="facts reveal" id="facts"></div>
+    </div>
+  </section>
+
+  <!-- Chapter 4 -->
+  <section class="chapter" id="c4" aria-label="Chapter 4, the shape">
+    <div class="wrap cut">
+      <div class="reveal">
+        <div class="num" aria-hidden="true">04</div>
+        <h2>The shape</h2>
+        <p>A round head that melts into a pear-shaped body, two small ears and a little knot on top. It sits up on its own and looks good on a shelf, a bed or a desk.</p>
+        <ul class="cutlist">
+          <li>A knot on top, knitted from the last length of thread</li>
+          <li>Embroidered dot eyes and a small curved smile</li>
+          <li>Firm stuffing that keeps the pear shape for years</li>
+        </ul>
+      </div>
+      <figure class="reveal">
+        <img data-img="doll" alt="Front of the coral knitted doll with the knot, ears and smile marked" width="460" height="575">
+        <button class="hotspot" style="left:50%;top:9%" aria-label="Knot"><span>Knot</span></button>
+        <button class="hotspot" style="left:50%;top:34%" aria-label="Smile"><span>Stitched smile</span></button>
+        <button class="hotspot" style="left:31%;top:17%" aria-label="Ear"><span>Ear</span></button>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Chapter 5 -->
+  <section class="chapter" id="c5" aria-label="Chapter 5, the colour">
+    <div class="wrap colour">
+      <div class="view reveal" id="view" role="img" aria-label="Selected colour of the Snuggloop doll"></div>
+      <div class="reveal">
+        <div class="num" aria-hidden="true">05</div>
+        <h2>The colour</h2>
+        <p>Coral is where it starts. Four pastel variants sit beside it, each dyed to hold its softness.</p>
+        <div class="swatches" id="swatches" role="group" aria-label="Choose a colour"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter 6 -->
+  <section class="chapter" id="c6" aria-label="Chapter 6, make yours">
+    <div class="wrap make">
+      <div class="make-view reveal" id="mkView" role="img" aria-label="Preview of your doll">
+        <span class="stitchname" id="mkName" aria-hidden="true"></span>
+        <span class="customdot" id="mkDot"><i id="mkDotI"></i>Your yarn colour</span>
+      </div>
+      <div class="make-form reveal">
+        <div>
+          <div class="num" aria-hidden="true" style="opacity:.16">06</div>
+          <h2>Make yours</h2>
+          <p>Choose the size, the colour and the little extras. Every doll is knitted to order, and the price updates as you go.</p>
+        </div>
+
+        <fieldset>
+          <legend>Size</legend>
+          <div class="cards" id="mkSizes"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Colour</legend>
+          <div class="chips2" id="mkColours"></div>
+          <div class="customrow" id="mkCustomRow"><input type="color" id="mkCustom" value="#f0a0a0" aria-label="Pick your yarn colour"><span>Pick the shade you have in mind. We match it to the nearest yarn and send you a photo to approve before knitting.</span></div>
+        </fieldset>
+
+        <div>
+          <label class="lab" for="mkNameIn">Embroidered name (optional, up to 10 letters, +&euro;6)</label>
+          <input type="text" id="mkNameIn" maxlength="10" autocomplete="off" placeholder="For example, Mila">
+        </div>
+
+        <fieldset>
+          <legend>Accessory (optional)</legend>
+          <div class="chips2" id="mkAcc"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Gift</legend>
+          <div class="chips2" id="mkGift"></div>
+        </fieldset>
+
+        <div class="pricebox" aria-live="polite">
+          <ul id="mkLines"></ul>
+          <div class="tot"><span>Indicative total</span><b id="mkTotal">&euro;58</b></div>
+          <small>Indicative prices in euros, shipping not included. We confirm the final price by email before you pay.</small>
+        </div>
+
+        <button class="btn" data-open style="font-size:18px;padding:19px 34px;justify-self:start">Preorder this doll</button>
+
+        <div class="how">
+          <div><b>1. Send your order</b>Nothing to pay today.</div>
+          <div><b>2. We confirm</b>Final price and a photo of your yarn, by email.</div>
+          <div><b>3. We knit</b>Made to order, about 4 to 6 weeks.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><svg class="knot" viewBox="0 0 48 48" aria-hidden="true"></svg><span>SNUGGLOOP</span></a>
+    <small>Made to be hugged. &copy; Snuggloop</small>
+  </div>
+</footer>
+
+<!-- Preorder modal -->
+<dialog id="modal" aria-labelledby="mTitle">
+  <div class="modal">
+    <div class="pic"><img data-img="doll" id="mPic" alt="Selected doll"></div>
+    <form method="dialog" id="form" novalidate>
+      <button type="button" class="close" data-close aria-label="Close">&times;</button>
+      <h3 id="mTitle">Preorder your doll</h3>
+      <fieldset>
+        <legend>Colour</legend>
+        <div class="chips" id="chipColours"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Size</legend>
+        <div class="chips" id="chipSizes"></div>
+      </fieldset>
+      <div class="msum" aria-live="polite"><ul id="mSum"></ul><div class="mt"><span>Indicative total</span><span id="mTot"></span></div></div>
+      <div><label for="fname">Your name</label><input type="text" id="fname" autocomplete="name" required></div>
+      <div><label for="femail">Email</label><input type="email" id="femail" autocomplete="email" required></div>
+      <div><label for="fnote">Anything we should know (optional)</label><textarea id="fnote" placeholder="A colour idea, a gift date, a special request"></textarea></div>
+      <button class="btn" type="submit">Send my order request</button>
+      <p class="note" id="err" role="alert" aria-live="assertive"></p>
+      <p class="note">Nothing to pay now. We email the final price and a photo to approve.</p>
+    </form>
+    <div class="done" id="done">
+      <svg viewBox="0 0 48 48" class="knot" aria-hidden="true"></svg>
+      <h3>Order request received</h3>
+      <p style="margin:10px auto 16px;max-width:38ch" id="doneMsg"></p>
+      <div class="msum" style="text-align:left;max-width:380px;margin:0 auto 20px"><ul id="dSum"></ul><div class="mt"><span>Indicative total</span><span id="dTot"></span></div></div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn ghost" type="button" id="copySum">Copy order summary</button><button class="btn" type="button" data-close>Close</button></div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ---------- assets: Higgsfield generations ---------- */
+const CDN="https://d8j0ntlcm91z4.cloudfront.net/user_3JoeoClL4vCcNcc5QvEyH1HhQAW/hf_20260926_";
+const IMG={
+  doll:CDN+"034625_8e588be8-d6c1-4ced-aba6-dab15719806a_min.webp",
+  celadon:CDN+"034658_6f7e0bbd-5164-44f0-a28b-3656b95bc3d8_min.webp",
+  butter:CDN+"034659_14990935-4611-485f-8f72-d451e9b9f61f_min.webp",
+  lilac:CDN+"034658_2f58a4ac-f8eb-4752-9b8e-b1b352e055db_min.webp",
+  sky:CDN+"034658_0ee78e52-2f53-4bad-a2f6-37725aaf49c7_min.webp",
+  thread:CDN+"034658_849af5db-6d09-4b2b-bf4f-f4ed1648f063_min.webp",
+  half:CDN+"034658_a401532d-1d7c-44d8-a041-4db80dac4348_min.webp"
+};
+document.querySelectorAll("img[data-img]").forEach(i=>{if(!i.closest(".hero"))i.loading="lazy";i.src=IMG[i.dataset.img];i.decoding="async";i.addEventListener("error",()=>{i.style.visibility="hidden"})});
+
+const COLOURS=[
+  {id:"doll",name:"Coral",note:"The original",hex:"#ee7a63"},
+  {id:"celadon",name:"Celadon mist",note:"Soft green",hex:"#bfd8c4"},
+  {id:"butter",name:"Butter",note:"Warm yellow",hex:"#f3e3a2"},
+  {id:"lilac",name:"Lilac",note:"Pale violet",hex:"#cfc0e6"},
+  {id:"sky",name:"Powder blue",note:"Clear sky",hex:"#bcd6ec"}
+];
+const SIZES=["Mini 20 cm","Classic 30 cm","Big 45 cm"];
+const FACTS=[
+  "A single continuous thread starts every doll",
+  "Snuggly cotton knit, soft in the hands",
+  "Every stitch pulled to the same tension",
+  "Firm, springy stuffing keeps the pear shape",
+  "Stitched face, so nothing is glued on",
+  "Colour goes in at the yarn stage and stays even",
+  "About 30 cm tall, sits up on its own",
+  "Hand-finished at the last seam"
+];
+
+/* ---------- knot logo (trefoil with over-under crossings) ---------- */
+(function(){
+  const N=720,pts=[];
+  for(let i=0;i<N;i++){const t=2*Math.PI*i/N;pts.push([Math.sin(t)+2*Math.sin(2*t),Math.cos(t)-2*Math.cos(2*t)])}
+  const s=7.4,cx=24,cy=24.5;
+  const P=pts.map(([x,y])=>[cx+x*s,cy+y*s]);
+  const d=(a,b)=>{let o="";for(let i=a;i<=b;i++){const p=P[((i%N)+N)%N];o+=(i===a?"M":"L")+p[0].toFixed(2)+" "+p[1].toFixed(2)}return o};
+  const overs=[31,271,511], hw=20;
+  let svg=`<path d="${d(0,N)}Z" fill="none" stroke="#16301f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`;
+  overs.forEach(c=>{
+    svg+=`<path d="${d(c-hw,c+hw)}" fill="none" stroke="var(--knot-bg,#f6f0e1)" stroke-width="7.4" stroke-linecap="butt"/>`;
+    svg+=`<path d="${d(c-hw-3,c+hw+3)}" fill="none" stroke="#16301f" stroke-width="3.4" stroke-linecap="round"/>`;
+  });
+  svg+=`<circle cx="${P[0][0].toFixed(2)}" cy="${P[0][1].toFixed(2)}" r="3.6" fill="#d8382c"/>`;
+  document.querySelectorAll("svg.knot").forEach(el=>{el.innerHTML=svg});
+  const f=document.querySelector("footer");if(f){f.querySelectorAll("svg.knot path[stroke='#16301f']").forEach(p=>p.setAttribute("stroke","#f6f0e1"));f.querySelectorAll("svg.knot path[stroke='var(--knot-bg,#f6f0e1)']").forEach(p=>p.setAttribute("stroke","#16301f"))}
+})();
+
+
+/* ---------- hero video (muted loop) ---------- */
+(function(){
+  const v=document.getElementById("heroVideo"),fig=v.parentNode;
+  v.src="https://d8j0ntlcm91z4.cloudfront.net/user_3JoeoClL4vCcNcc5QvEyH1HhQAW/hf_20260926_034904_4f1363c4-1207-44ff-abfd-19ef0b34717b.mp4";
+  v.muted=true;
+  v.addEventListener("playing",()=>fig.classList.add("playing"));
+  v.addEventListener("error",()=>fig.classList.remove("playing"));
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches){v.removeAttribute("autoplay");v.pause();return}
+  const p=v.play();if(p&&p.catch)p.catch(()=>{});
+  document.addEventListener("visibilitychange",()=>{document.hidden?v.pause():v.play().catch(()=>{})});
+})();
+
+/* ---------- marquee ---------- */
+(function(){
+  const html=FACTS.map(f=>`<span>${f}</span>`).join("");
+  document.getElementById("marquee").innerHTML=html+html;
+})();
+
+/* ---------- facts list ---------- */
+document.getElementById("facts").innerHTML=[
+  ["1 thread","Each doll begins as one unbroken line of yarn before it is knitted."],
+  ["Snuggly knit","Thick stitches you can see and feel, tight at every seam."],
+  ["Stitched face","Eyes and smile are embroidered, so there is nothing glued on."],
+  ["Even tone","Colour goes in at the yarn stage, so there are no pale patches."],
+  ["30 cm","Sits up on its own and fits in the crook of an arm."]
+].map(([a,b])=>`<div class="fact"><b>${a}</b><span>${b}</span></div>`).join("");
+
+/* ---------- stitch illustration ---------- */
+(function(){
+  const svg=document.getElementById("stitchSvg");let o="";
+  for(let r=0;r<9;r++){
+    let d=`M ${-10} ${22*r+16}`;
+    for(let c=0;c<11;c++){const x=c*20;d+=` q 10 -18 20 0`}
+    o+=`<g class="row"><path class="${r===4?"r":""}" d="${d}"/></g>`;
+  }
+  svg.innerHTML=o;
+})();
+
+/* ---------- shared order state and prices ---------- */
+const PRICE={Mini:38,Classic:58,Big:89,name:6,custom:8,acc:9,gift:7};
+const SIZEOPT=[{id:"Mini",cm:"20 cm",note:"Fits a palm"},{id:"Classic",cm:"30 cm",note:"Sits up alone"},{id:"Big",cm:"45 cm",note:"Full hug size"}];
+const ACC=[{id:"none",label:"None"},{id:"scarf",label:"Knitted scarf"},{id:"hat",label:"Tiny hat"}];
+const CFG={colour:"doll",custom:"#f0a0a0",size:"Classic",name:"",acc:"none",gift:false};
+const eur=n=>new Intl.NumberFormat("en-IE",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n);
+const subs=[];function setCfg(p){Object.assign(CFG,p);subs.forEach(f=>f())}
+function orderLines(){
+  const so=SIZEOPT.find(x=>x.id===CFG.size),L=[[`${so.id} doll, ${so.cm}`,PRICE[CFG.size]]];
+  const cn=CFG.colour==="custom"?"Custom colour match":COLOURS.find(c=>c.id===CFG.colour).name+" colour";
+  L.push([cn,CFG.colour==="custom"?PRICE.custom:0]);
+  if(CFG.name.trim())L.push([`Embroidered name, ${CFG.name.trim()}`,PRICE.name]);
+  if(CFG.acc!=="none")L.push([ACC.find(a=>a.id===CFG.acc).label,PRICE.acc]);
+  if(CFG.gift)L.push(["Gift box and handwritten note",PRICE.gift]);
+  return L;
+}
+const orderTotal=()=>orderLines().reduce((t,l)=>t+l[1],0);
+const imgFor=id=>IMG[id==="custom"?"doll":id];
+const liHtml=L=>L.map(([a,b])=>`<li><span>${a.replace(/[<>&]/g,"")}</span><span>${b?eur(b):"Included"}</span></li>`).join("");
+
+/* ---------- colour picker (chapter 5) ---------- */
+(function(){
+  const view=document.getElementById("view"),sw=document.getElementById("swatches");
+  COLOURS.forEach((c,i)=>{
+    const im=document.createElement("img");im.src=IMG[c.id];im.loading="lazy";im.alt=c.name+" doll";im.dataset.id=c.id;
+    im.addEventListener("error",()=>{im.style.visibility="hidden"});view.appendChild(im);
+    const b=document.createElement("button");b.className="sw";b.type="button";b.dataset.id=c.id;
+    b.innerHTML=`<i style="background:${c.hex}"></i>${c.name}<small>${c.note}</small>`;
+    b.addEventListener("click",()=>setCfg({colour:c.id}));sw.appendChild(b);
+  });
+  subs.push(()=>{
+    const id=CFG.colour==="custom"?"doll":CFG.colour;
+    view.querySelectorAll("img").forEach(i=>i.classList.toggle("on",i.dataset.id===id));
+    sw.querySelectorAll(".sw").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===CFG.colour));
+    view.setAttribute("aria-label",(CFG.colour==="custom"?"Coral":COLOURS.find(c=>c.id===CFG.colour).name)+" doll");
+  });
+})();
+
+/* ---------- make yours (chapter 6) ---------- */
+(function(){
+  const view=document.getElementById("mkView"),nm=document.getElementById("mkName"),dot=document.getElementById("mkDot"),dotI=document.getElementById("mkDotI");
+  COLOURS.forEach(c=>{const im=document.createElement("img");im.src=IMG[c.id];im.loading="lazy";im.alt="";im.dataset.id=c.id;im.addEventListener("error",()=>{im.style.visibility="hidden"});view.insertBefore(im,view.firstChild)});
+  document.getElementById("mkSizes").innerHTML=SIZEOPT.map(o=>`<input type="radio" name="mkSize" id="k-s-${o.id}" value="${o.id}"><label class="card" for="k-s-${o.id}"><b>${o.id}</b><span>${o.cm}, ${o.note}</span><em>${eur(PRICE[o.id])}</em></label>`).join("");
+  document.getElementById("mkColours").innerHTML=COLOURS.map(c=>`<input type="radio" name="mkCol" id="k-c-${c.id}" value="${c.id}"><label for="k-c-${c.id}"><i style="background:${c.hex}"></i>${c.name}</label>`).join("")+`<input type="radio" name="mkCol" id="k-c-custom" value="custom"><label for="k-c-custom"><i style="background:conic-gradient(#ee7a63,#f3e3a2,#bfd8c4,#bcd6ec,#cfc0e6,#ee7a63)"></i>Your own colour <small>+${eur(PRICE.custom)}</small></label>`;
+  document.getElementById("mkAcc").innerHTML=ACC.map(a=>`<input type="radio" name="mkAcc" id="k-a-${a.id}" value="${a.id}"><label for="k-a-${a.id}">${a.label}${a.id==="none"?"":` <small>+${eur(PRICE.acc)}</small>`}</label>`).join("");
+  document.getElementById("mkGift").innerHTML=`<input type="checkbox" id="k-gift"><label for="k-gift">Gift box and handwritten note <small>+${eur(PRICE.gift)}</small></label>`;
+  document.querySelectorAll('input[name="mkSize"]').forEach(r=>r.addEventListener("change",()=>setCfg({size:r.value})));
+  document.querySelectorAll('input[name="mkCol"]').forEach(r=>r.addEventListener("change",()=>setCfg({colour:r.value})));
+  document.querySelectorAll('input[name="mkAcc"]').forEach(r=>r.addEventListener("change",()=>setCfg({acc:r.value})));
+  document.getElementById("k-gift").addEventListener("change",e=>setCfg({gift:e.target.checked}));
+  document.getElementById("mkNameIn").addEventListener("input",e=>setCfg({name:e.target.value.replace(/[^\p{L}\p{N} '-]/gu,"")}));
+  document.getElementById("mkCustom").addEventListener("input",e=>setCfg({custom:e.target.value}));
+  const rows=document.getElementById("mkCustomRow"),lines=document.getElementById("mkLines"),tot=document.getElementById("mkTotal"),nameIn=document.getElementById("mkNameIn");
+  subs.push(()=>{
+    view.querySelectorAll("img").forEach(i=>i.classList.toggle("on",i.dataset.id===(CFG.colour==="custom"?"doll":CFG.colour)));
+    document.getElementById("k-s-"+CFG.size).checked=true;
+    document.getElementById("k-c-"+CFG.colour).checked=true;
+    document.getElementById("k-a-"+CFG.acc).checked=true;
+    document.getElementById("k-gift").checked=CFG.gift;
+    if(nameIn.value!==CFG.name)nameIn.value=CFG.name;
+    nm.textContent=CFG.name.trim();
+    rows.classList.toggle("show",CFG.colour==="custom");dot.classList.toggle("show",CFG.colour==="custom");dotI.style.background=CFG.custom;
+    lines.innerHTML=liHtml(orderLines());tot.textContent=eur(orderTotal());
+    view.setAttribute("aria-label","Preview of your "+(CFG.colour==="custom"?"custom colour":COLOURS.find(c=>c.id===CFG.colour).name.toLowerCase())+" "+CFG.size.toLowerCase()+" doll");
+  });
+})();
+
+/* ---------- scroll: thread becomes polo ---------- */
+(function(){
+  const scrub=document.getElementById("scrub"),path=document.getElementById("threadPath");
+  const imgs=document.querySelectorAll("#stage img"),[iThread,iHalf,iPolo]=imgs;
+  const meter=document.getElementById("meter"),label=document.getElementById("stageLabel");
+  const len=path.getTotalLength();path.style.strokeDasharray=len;path.style.strokeDashoffset=len;
+  const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),seg=(p,a,b)=>clamp((p-a)/(b-a));
+  const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  let tick=false;
+  function frame(){
+    tick=false;
+    const r=scrub.getBoundingClientRect(),total=r.height-innerHeight;
+    const p=reduce?1:clamp(-r.top/total);
+    path.style.strokeDashoffset=len*(1-seg(p,0,.3));
+    const svgOp=1-seg(p,.34,.46);path.parentNode.style.opacity=svgOp;
+    iThread.style.opacity=seg(p,.28,.4)*(1-seg(p,.5,.6));
+    iHalf.style.opacity=seg(p,.5,.6)*(1-seg(p,.72,.82));
+    iPolo.style.opacity=seg(p,.72,.84);
+    meter.style.width=(p*100)+"%";
+    label.textContent=p<.3?"Thread":p<.5?"Loop":p<.72?"Knit":"Doll";
+  }
+  function req(){if(!tick){tick=true;requestAnimationFrame(frame)}}
+  addEventListener("scroll",req,{passive:true});addEventListener("resize",req);frame();
+})();
+
+/* ---------- in-page links: always scroll, even inside a preview frame ---------- */
+(function(){
+  const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener("click",e=>{
+      const id=a.getAttribute("href").slice(1),el=id?document.getElementById(id):document.body;
+      if(!el)return;
+      e.preventDefault();
+      if(!id||id==="top"){window.scrollTo({top:0,behavior:reduce?"auto":"smooth"})}
+      else{el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})}
+      if(el.id){try{history.replaceState(null,"","#"+el.id)}catch(_){}}
+    });
+  });
+})();
+
+/* ---------- reveals ---------- */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+})();
+
+/* ---------- preorder modal ---------- */
+const ORDER_ENDPOINT=""; /* set to a URL that accepts JSON to send orders to your own inbox or shop */
+(function(){
+  const dlg=document.getElementById("modal"),form=document.getElementById("form"),err=document.getElementById("err");
+  const chipC=document.getElementById("chipColours"),chipS=document.getElementById("chipSizes"),pic=document.getElementById("mPic");
+  chipC.innerHTML=COLOURS.map(c=>`<input type="radio" name="colour" id="c-${c.id}" value="${c.id}"><label for="c-${c.id}"><i style="background:${c.hex}"></i>${c.name}</label>`).join("")+`<input type="radio" name="colour" id="c-custom" value="custom"><label for="c-custom"><i style="background:conic-gradient(#ee7a63,#f3e3a2,#bfd8c4,#bcd6ec,#cfc0e6,#ee7a63)"></i>Your own</label>`;
+  chipS.innerHTML=SIZEOPT.map(o=>`<input type="radio" name="size" id="s-${o.id}" value="${o.id}"><label for="s-${o.id}">${o.id} ${o.cm}</label>`).join("");
+  chipC.addEventListener("change",e=>setCfg({colour:e.target.value}));
+  chipS.addEventListener("change",e=>setCfg({size:e.target.value}));
+  const mSum=document.getElementById("mSum"),mTot=document.getElementById("mTot");
+  subs.push(()=>{
+    document.getElementById("c-"+CFG.colour).checked=true;document.getElementById("s-"+CFG.size).checked=true;
+    pic.src=imgFor(CFG.colour);mSum.innerHTML=liHtml(orderLines());mTot.textContent=eur(orderTotal());
+  });
+  let opener=null;
+  function open(e){
+    opener=e&&e.currentTarget;
+    dlg.classList.remove("sent");err.textContent="";
+    dlg.showModal();document.body.style.overflow="hidden";
+  }
+  function close(){dlg.close()}
+  dlg.addEventListener("close",()=>{document.body.style.overflow="";opener&&opener.focus()});
+  dlg.addEventListener("click",e=>{if(e.target===dlg)close()});
+  document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",open));
+  dlg.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",close));
+  function summaryText(o){return `SNUGGLOOP order request\n${o.lines.map(l=>`- ${l[0]}: ${l[1]?eur(l[1]):"included"}`).join("\n")}\nIndicative total: ${eur(o.total)} (shipping not included)\nName: ${o.name}\nEmail: ${o.email}${o.custom_colour?`\nYarn colour: ${o.custom_colour}`:""}${o.note?`\nNote: ${o.note}`:""}`}
+  let last=null;
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();
+    const n=form.fname.value.trim(),m=form.femail.value.trim();
+    if(!n){err.textContent="Please add your name.";form.fname.focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){err.textContent="That email looks incomplete.";form.femail.focus();return}
+    const o={name:n,email:m,note:form.fnote.value.trim().slice(0,600),size:CFG.size,colour:CFG.colour,custom_colour:CFG.colour==="custom"?CFG.custom:"",embroidered_name:CFG.name.trim(),accessory:CFG.acc,gift:CFG.gift,lines:orderLines(),total:orderTotal(),currency:"EUR",indicative:true};
+    last=o;
+    if(ORDER_ENDPOINT){try{const r=await fetch(ORDER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});if(!r.ok)throw 0}catch(_){err.textContent="We could not send that just now. Please try again in a moment.";return}}
+    const col=CFG.colour==="custom"?"custom colour":COLOURS.find(c=>c.id===CFG.colour).name.toLowerCase();
+    document.getElementById("doneMsg").textContent=`Thank you, ${n.split(" ")[0]}. Your ${col} ${CFG.size.toLowerCase()} doll is on our list. We will write to ${m} with the final price and a photo to approve. Nothing to pay yet.`;
+    document.getElementById("dSum").innerHTML=liHtml(o.lines);document.getElementById("dTot").textContent=eur(o.total);
+    dlg.classList.add("sent");
+  });
+  document.getElementById("copySum").addEventListener("click",async e=>{
+    if(!last)return;const b=e.currentTarget;
+    try{await navigator.clipboard.writeText(summaryText(last));b.textContent="Copied"}catch(_){b.textContent="Copy not available here"}
+    setTimeout(()=>{b.textContent="Copy order summary"},2000);
+  });
+  setCfg({});
+})();
+</script>
+</body>
+</html>
